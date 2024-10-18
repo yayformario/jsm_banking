@@ -3,13 +3,39 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import {Input} from '@/components/ui/input'
 import { z } from "zod"
- 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-})
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import {
+    Form, 
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form'
+import { Button } from './button';
+import CustomInput from './CustomInput';
+import { authFormSchema } from '@/lib/utils';
+
 
 const AuthForm = ( {type}: {type: string}) => {
+    // 1. Defining form
+    const form = useForm<z.infer<typeof authFormSchema>>({
+        resolver: zodResolver(authFormSchema),
+        defaultValues: {
+            email: '',
+            password: '',
+        }
+    })
+
+    //2. define a submit handler
+    function onSubmit(values: z.infer<typeof authFormSchema>){
+        //type-safe and validated
+        console.log(values)
+    }
 
   const [user, setUser] = useState(null)
   return (
@@ -53,7 +79,13 @@ const AuthForm = ( {type}: {type: string}) => {
                 {/* Plaid link to link bank account*/}
             </div>
         ): (
-            <> SHADCN FORM </>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <CustomInput control={form.control} name={'email'} label={'Email'} placeholder={'Enter your email'} />
+                    <CustomInput control={form.control} name={'password'} label={'Password'} placeholder={'Enter your password'}/>
+                    <Button type="submit">Submit</Button>
+                </form>
+            </Form>
         )}
     </section>
   )
