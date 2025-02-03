@@ -27,17 +27,21 @@ declare type LoginUser = {
 
 declare type User = {
   $id: string;
+
   email: string;
   userId: string;
   dwollaCustomerUrl: string;
   dwollaCustomerId: string;
+
   name: string;
   firstName: string;
   lastName: string;
+
   address1: string;
   city: string;
   state: string;
   postalCode: string;
+
   dateOfBirth: string;
   ssn: string;
 };
@@ -64,18 +68,22 @@ declare type Account = {
 };
 
 declare type Transaction = {
-  id: string;
   $id: string;
+
+  id: string;
   name: string;
   paymentChannel: string;
   type: string;
+
   accountId: string;
   amount: number;
   pending: boolean;
   category: string;
+
   date: string;
   image: string;
   type: string;
+  
   $createdAt: string;
   channel: string;
   senderBankId: string;
@@ -84,12 +92,15 @@ declare type Transaction = {
 
 declare type Bank = {
   $id: string;
+
   accountId: string;
   bankId: string;
+
   accessToken: string;
   fundingSourceUrl: string;
-  userId: string;
+  
   shareableId: string;
+  userId: string;
 };
 
 declare type AccountTypes =
