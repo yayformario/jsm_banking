@@ -11,6 +11,7 @@ const Home = async({searchParams: {id, page } }: SearchParamProps) => {
     
     //Wait for a user to log in and fetch their accounts
     const loggedIn = await getLoggedInUser();
+    
     const accounts = await getAccounts ({ 
         userId: loggedIn.$id
     })
@@ -61,7 +62,7 @@ const Home = async({searchParams: {id, page } }: SearchParamProps) => {
 
             <RightSidebar
                 user={loggedIn}
-                transactions = {accounts?.transactions}
+                transactions = {account?.transactions}
                 banks= {accountsData?.slice(0,2)}
             />
         
